@@ -44,9 +44,7 @@ class LoginViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        navigationController?.navigationBar.isHidden = true
-        //navigationController?.navigationBar.barStyle = .black // msm nao aprecendo mais deixar as infos em cima mais visiveis
-        
+        navigationController?.navigationBar.isHidden = true        
         view.addSubview(twitterLogo)
         twitterLogo.heightAnchor.constraint(equalToConstant: 70).isActive = true
         twitterLogo.widthAnchor.constraint(equalToConstant: 70).isActive = true

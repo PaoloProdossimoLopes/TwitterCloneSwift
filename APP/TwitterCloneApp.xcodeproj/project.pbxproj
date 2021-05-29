@@ -21,7 +21,6 @@
 		9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */; };
 		9DED3A73265524FD00C6269B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A72265524FD00C6269B /* LoginController.swift */; };
 		9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */; };
-		9DF243B22662647F0097576F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF243B12662647F0097576F /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,7 @@
 		9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCntroller.swift; sourceTree = "<group>"; };
 		9DED3A72265524FD00C6269B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		9DF243B12662647F0097576F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../../Downloads/Extensions.swift; sourceTree = "<group>"; };
+		9DF243BC266266900097576F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,11 +112,7 @@
 		9DD457342650D80F001C2B10 /* TwitterCloneApp */ = {
 			isa = PBXGroup;
 			children = (
-				9DD457682650D891001C2B10 /* API */,
-				9DD4576D2650D8CA001C2B10 /* Utils */,
-				9DD4576C2650D89B001C2B10 /* Model */,
-				9DD4576B2650D899001C2B10 /* View */,
-				9DD4576A2650D897001C2B10 /* ViewModels */,
+				9DF243B6266266620097576F /* Utils */,
 				9DD457692650D895001C2B10 /* Controllers */,
 				9DD457352650D80F001C2B10 /* AppDelegate.swift */,
 				9DD457372650D80F001C2B10 /* SceneDelegate.swift */,
@@ -147,13 +142,6 @@
 			path = TwitterCloneAppUITests;
 			sourceTree = "<group>";
 		};
-		9DD457682650D891001C2B10 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		9DD457692650D895001C2B10 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,35 +155,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		9DD4576A2650D897001C2B10 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		9DD4576B2650D899001C2B10 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		9DD4576C2650D89B001C2B10 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		9DD4576D2650D8CA001C2B10 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				9DF243B12662647F0097576F /* Extensions.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		9DED3A71265524D400C6269B /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +162,14 @@
 				9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9DF243B6266266620097576F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9DF243BC266266900097576F /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,7 +307,6 @@
 				9DD457822650DC23001C2B10 /* ExploreController.swift in Sources */,
 				9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */,
 				9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */,
-				9DF243B22662647F0097576F /* Extensions.swift in Sources */,
 				9DD457382650D80F001C2B10 /* SceneDelegate.swift in Sources */,
 				9DED3A73265524FD00C6269B /* LoginController.swift in Sources */,
 				9DD457752650D9AC001C2B10 /* MainTabController.swift in Sources */,
