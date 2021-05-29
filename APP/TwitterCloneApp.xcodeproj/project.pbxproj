@@ -21,6 +21,7 @@
 		9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */; };
 		9DED3A73265524FD00C6269B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A72265524FD00C6269B /* LoginController.swift */; };
 		9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */; };
+		9DF243CC26627D8F0097576F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF243BC266266900097576F /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 			children = (
 				9DED3A71265524D400C6269B /* Authentication */,
 				9DD457742650D9AC001C2B10 /* MainTabController.swift */,
+				9DF243BC266266900097576F /* Extensions.swift */,
 				9DD4577C2650DC04001C2B10 /* FeedCntroller.swift */,
 				9DD457812650DC23001C2B10 /* ExploreController.swift */,
 				9DD457862650DC42001C2B10 /* NotificationController.swift */,
@@ -167,7 +169,6 @@
 		9DF243B6266266620097576F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				9DF243BC266266900097576F /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -307,6 +308,7 @@
 				9DD457822650DC23001C2B10 /* ExploreController.swift in Sources */,
 				9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */,
 				9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */,
+				9DF243CC26627D8F0097576F /* Extensions.swift in Sources */,
 				9DD457382650D80F001C2B10 /* SceneDelegate.swift in Sources */,
 				9DED3A73265524FD00C6269B /* LoginController.swift in Sources */,
 				9DD457752650D9AC001C2B10 /* MainTabController.swift in Sources */,
