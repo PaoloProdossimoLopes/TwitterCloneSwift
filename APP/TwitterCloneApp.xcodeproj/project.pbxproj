@@ -22,6 +22,7 @@
 		9DED3A73265524FD00C6269B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A72265524FD00C6269B /* LoginController.swift */; };
 		9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */; };
 		9DF243CC26627D8F0097576F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF243BC266266900097576F /* Extensions.swift */; };
+		9DFF21772663CD7000A3C728 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF21762663CD7000A3C728 /* Components.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		9DED3A72265524FD00C6269B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9DF243BC266266900097576F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9DFF21762663CD7000A3C728 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		9DF243B6266266620097576F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9DFF21762663CD7000A3C728 /* Components.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			files = (
 				9DD457872650DC42001C2B10 /* NotificationController.swift in Sources */,
 				9DD457362650D80F001C2B10 /* AppDelegate.swift in Sources */,
+				9DFF21772663CD7000A3C728 /* Components.swift in Sources */,
 				9DD457822650DC23001C2B10 /* ExploreController.swift in Sources */,
 				9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */,
 				9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */,

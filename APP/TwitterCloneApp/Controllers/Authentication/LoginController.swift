@@ -66,7 +66,6 @@ class LoginViewController: UIViewController {
         let dividerView = UIView()
         dividerView.backgroundColor = .white
         view.addSubview(dividerView)
-        view.addSubview(dividerView)
         dividerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,right: view.rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1.0)
         
         return view
@@ -90,6 +89,31 @@ class LoginViewController: UIViewController {
         tf.isSecureTextEntry = true
         return tf
     }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        //style
+        button.setTitle("Sign in", for: .normal)
+        button.tintColor = .twitterBlue
+        button.backgroundColor = .white
+        
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        button.addTarget(self, action: #selector(LoginAccept), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var DontHaveAccountButton : UIButton = {
+        let button = DontHaveAccountButtonComponent().setButtonDontHaveAccount("if you don't have account: ","register")
+        
+        button.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+        
+        return button
+    }()
+    
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -100,6 +124,15 @@ class LoginViewController: UIViewController {
     }
     
     //MARK: - Selectors
+    @objc private func signUp() {
+        let view = RegistrationViewControlelr()
+        navigationController?.pushViewController(view, animated: true)
+    }
+    
+    @objc private func LoginAccept() {
+      let view = MainTabController()
+        navigationController?.pushViewController(view, animated: true)
+    }
     
     //MARK: - Helpers
     
@@ -119,12 +152,15 @@ class LoginViewController: UIViewController {
         
         view.backgroundColor = .twitterBlue
         
-        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView])
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
         stack.axis = .vertical
         stack.spacing = 10
         
         view.addSubview(stack)
         stack.anchor(top: twitterLogo.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 10,paddingRight: 10)
+        
+        view.addSubview(DontHaveAccountButton)
+        DontHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 40, paddingRight: 8)
         
     }
 }

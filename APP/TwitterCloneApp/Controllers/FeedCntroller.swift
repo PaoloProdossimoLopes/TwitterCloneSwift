@@ -27,7 +27,7 @@ class FeedController: UIViewController {
     func configureUI(){
         
         //Setando o logo
-        let logoViewTitle = UIImageView(image: UIImage(named: "twitterLogo"))
+        let logoViewTitle = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         logoViewTitle.contentMode = .scaleAspectFit
         navigationItem.titleView = logoViewTitle
     }
