@@ -19,117 +19,149 @@ class LoginViewController: UIViewController {
     
     var twitterLogo : UIImageView = {
         let logo = UIImageView()
-        
         logo.contentMode = .scaleAspectFit
         logo.clipsToBounds = true
-        logo.image = #imageLiteral(resourceName: "twitterLogo")
-        logo.tintColor = .black
-        
+        logo.image = #imageLiteral(resourceName: "TwitterLogo")
         return logo
     }()
     
-    private lazy var emailContentView: UIView = {
+    private lazy var emailContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let icon = UIImageView()
-        icon.image = #imageLiteral(resourceName: "plus")
-        icon.tintColor = .black
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        icon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-    
+        icon.image = #imageLiteral(resourceName: "mail")
+        icon.tintColor = .white
         view.addSubview(icon)
+
+        icon.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
+        icon.setDimensions(width: 24, height: 24)
+        
+        view.addSubview(emailTexteField)
+        emailTexteField.anchor(left: icon.rightAnchor, bottom:view.bottomAnchor, right:view.rightAnchor, paddingLeft:8, paddingBottom: 8 , paddingRight:8)
+        
+        let dividerView = UIView()
+        dividerView.backgroundColor = .white
+        view.addSubview(dividerView)
+        dividerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,right: view.rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1.0)
         
         return view
     }()
     
-    private lazy var passwordContentView: UIView = {
+    private lazy var passwordContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let icon = UIImageView()
-        icon.image = #imageLiteral(resourceName: "home")
-        icon.tintColor = .black
-        
-        
-        let textField = UITextField()
-        textField.placeholder = "Password"
-        textField.textColor = .black
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        
+        icon.image = #imageLiteral(resourceName: "ic_lock_outline_white_2x")
+        icon.tintColor = .white
         view.addSubview(icon)
-        view.addSubview(textField)
+
+        icon.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
+        icon.setDimensions(width: 24, height: 24)
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.anchor(left: icon.rightAnchor, bottom:view.bottomAnchor, right:view.rightAnchor, paddingLeft:8,paddingBottom: 8 ,paddingRight:8)
+        
+        let dividerView = UIView()
+        dividerView.backgroundColor = .white
+        view.addSubview(dividerView)
+        dividerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor,right: view.rightAnchor, paddingLeft: 8, paddingRight: 8, height: 1.0)
+        
         return view
     }()
     
+    private lazy var emailTexteField: UITextField = {
+       let tf = UITextField()
+//        tf.placeholder = "E-mail"
+        tf.textColor = .white
+        tf.font = UIFont.systemFont(ofSize: 16)
+        tf.attributedPlaceholder = NSAttributedString(string: "E-mail" , attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+       return tf
+    }()
     
+    private lazy var passwordTextField: UITextField = {
+       let tf = UITextField()
+//        tf.placeholder = "Password"
+        tf.font = UIFont.systemFont(ofSize: 16)
+        tf.textColor = .white
+        tf.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        //style
+        button.setTitle("Sign in", for: .normal)
+        button.tintColor = .twitterBlue
+        button.backgroundColor = .white
+        
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        button.addTarget(self, action: #selector(LoginAccept), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var DontHaveAccountButton : UIButton = {
+        let button = DontHaveAccountButtonComponent().setButtonDontHaveAccount("if you don't have account: ","register")
+        
+        button.addTarget(self, action: #selector(signUp), for: .touchUpInside)
+        
+        return button
+    }()
+    
+
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        configureButton()
        
     }
     
     //MARK: - Selectors
+    @objc private func signUp() {
+        let view = RegistrationViewControlelr()
+        navigationController?.pushViewController(view, animated: true)
+    }
+    
+    @objc private func LoginAccept() {
+      let view = MainTabController()
+        navigationController?.pushViewController(view, animated: true)
+    }
     
     //MARK: - Helpers
     
     private func configureUI(){
         
-        view.backgroundColor = .white
-        
         navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationBar.barStyle = .black // msm nao aprecendo mais deixar as infos em cima mais visiveis
+        navigationController?.navigationBar.barStyle = .black
+
         
         view.addSubview(twitterLogo)
-        twitterLogo.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        twitterLogo.widthAnchor.constraint(equalToConstant:30).isActive = true
+        twitterLogo.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        twitterLogo.widthAnchor.constraint(equalToConstant: 150).isActive = true
         twitterLogo.translatesAutoresizingMaskIntoConstraints = false
         twitterLogo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
 //        twitterLogo.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
-        twitterLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        twitterLogo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         
-        let stackView = UIStackView(arrangedSubviews: [emailContentView, passwordContentView])
-        stackView.axis = .vertical
-        stackView.spacing = 10
+        view.backgroundColor = .twitterBlue
         
-        view.addSubview(stackView)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: twitterLogo.bottomAnchor, constant: 0).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        stackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-        stackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10).isActive = true
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
+        stack.axis = .vertical
+        stack.spacing = 10
         
+        view.addSubview(stack)
+        stack.anchor(top: twitterLogo.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 10,paddingRight: 10)
         
-    }
-    
-    
-    func configureButton(){
-        view.addSubview(goRegisterScreen)
+        view.addSubview(DontHaveAccountButton)
+        DontHaveAccountButton.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 40, paddingRight: 8)
         
-    }
-    
-    
-}
-
-
-extension UIView {
-    // adicionei para teste do terminal
-    
-    func centerX(inView view: UIView, topAnchor: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = 0) {
-        translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        if let topAnchor = topAnchor {
-            self.topAnchor.constraint(equalTo: topAnchor, constant: paddingTop!).isActive = true
-        }
     }
 }
 

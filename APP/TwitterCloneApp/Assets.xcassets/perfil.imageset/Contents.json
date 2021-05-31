@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "ic_person_outline_white_2x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "home_unselected@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

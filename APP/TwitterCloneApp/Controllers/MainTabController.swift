@@ -15,7 +15,7 @@ class MainTabController: UITabBarController {
         button.backgroundColor = .systemBlue
         button.tintColor = .white
         
-        button.setImage(UIImage(named: "plus"), for: .normal)
+        button.setImage(UIImage(named: "new_tweet"), for: .normal)
         
         //responsavel por capturar a açao do botao
         button.addTarget(self, action: #selector(TouchActionButton), for: .touchUpInside)
@@ -55,19 +55,19 @@ extension MainTabController{
     func configureUIButtonAction(){
         view.addSubview(buttonAction)
         
-        let buttonSize = 60
+//        let buttonSize = 10
         
         buttonAction.contentMode = .scaleAspectFit
         
         buttonAction.translatesAutoresizingMaskIntoConstraints = false
         
-        buttonAction.heightAnchor.constraint(equalToConstant: CGFloat(buttonSize))
-        buttonAction.widthAnchor.constraint(equalToConstant: CGFloat(buttonSize))
+        buttonAction.heightAnchor.constraint(equalToConstant: CGFloat(65)).isActive = true
+        buttonAction.widthAnchor.constraint(equalToConstant: CGFloat(65)).isActive = true
         
         buttonAction.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -70).isActive = true
         buttonAction.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25).isActive = true
         
-        buttonAction.layer.cornerRadius = CGFloat(buttonSize/2)
+        buttonAction.layer.cornerRadius = CGFloat(65/2)
     }
     
     func configureViewControllers(){
@@ -80,17 +80,17 @@ extension MainTabController{
         
         let explore = ExploreController()
 //        explore.tabBarItem.image = UIImage(named: "explore")
-        let exploreNav = templateNavigationCOntroller(MyImageName: "explore", MyViewController: explore)
+        let exploreNav = templateNavigationCOntroller(MyImageName: "search", MyViewController: explore)
         
         
         let notification = NotificationController()
 //        notification.tabBarItem.image = UIImage(named: "notification")
-        let notificationNav = templateNavigationCOntroller(MyImageName: "notification", MyViewController: notification)
+        let notificationNav = templateNavigationCOntroller(MyImageName: "comment", MyViewController: notification)
         
         
         let message = MessageController()
 //        message.tabBarItem.image = UIImage(named: "message")
-        let messageNav = templateNavigationCOntroller(MyImageName: "message", MyViewController: message)
+        let messageNav = templateNavigationCOntroller(MyImageName: "perfil", MyViewController: message)
         
         
         //palavra reservada para a tabBar setar quais view exibir nela para navegar
@@ -104,12 +104,12 @@ extension MainTabController{
         //Vinculando uma Viewcontroller para criar uma NavigationBar
         let nav = UINavigationController(rootViewController: MyViewController)
         //CUstomizando a TabBar
-        nav.tabBarItem.image = UIImage(named: MyImageName)
+        let images = UIImage(named: MyImageName)
+        nav.tabBarItem.image = images
         nav.tabBarController?.tabBar.backgroundColor = .white
         //Customizando a NavigationBar
         nav.navigationBar.backgroundColor = .white
-        
-        
+         
         return nav
     }
     
