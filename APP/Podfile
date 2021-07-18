@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'TwitterCloneApp' do
+	#Default
+	use_frameworks!
+
+	# Pods for TwitterCloneApp
+	pod 'Firebase/Core'
+	pod 'Firebase/Database'
+	pod 'Firebase/Storage'
+	pod 'Firebase/Auth'
+end
+
+
+target 'TwitterCloneAppTests' do
+    	inherit! :search_paths
+    	# Pods for testing
+end
+
+target 'TwitterCloneAppUITests' do
+	# Pods for testing
+end

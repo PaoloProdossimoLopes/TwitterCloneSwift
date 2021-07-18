@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     //MARK: - Properties
@@ -118,19 +119,27 @@ class LoginViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DEBUGMessage("Tela de login carregou")
         configureUI()
        
     }
     
     //MARK: - Selectors
     @objc private func signUp() {
+        DEBUGMessage("Cliclou no botao de ir para tela de registro")
         let view = RegistrationViewControlelr()
         navigationController?.pushViewController(view, animated: true)
     }
     
     @objc private func LoginAccept() {
-      let view = MainTabController()
+        
+        guard let email = emailTexteField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        DEBUGMessage("Email: \(email)")
+        DEBUGMessage("Senha: \(password)")
+        
+        let view = MainTabController()
         navigationController?.pushViewController(view, animated: true)
     }
     

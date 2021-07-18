@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class RegistrationViewControlelr: UIViewController, UINavigationControllerDelegate {
     
@@ -31,8 +32,9 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
          let tf = UITextField()
          tf.font = UIFont.systemFont(ofSize: 16)
          tf.textColor = .white
-         tf.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-         return tf
+//         tf.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        tf.attributedPlaceholder = myPlaceholderStyle(text: "Name", Color: .white)
+        return tf
     }()
     
     private let lastNameTextField: UITextField = {
@@ -70,7 +72,7 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     private lazy var createCountButton: UIButton = {
         let button = UIButton(type: .system)
         //style
-        button.setTitle("Sign in", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.tintColor = .twitterBlue
         button.backgroundColor = .white
         
@@ -86,6 +88,7 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     //MARK: - lifeCylcle
     override func viewDidLoad() {
         super.viewDidLoad()
+        DEBUGMessage("Tela de registro carregou")
         configureUI()
     }
     
@@ -95,12 +98,31 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     }
     
     @objc func registerHandler() {
-        let vc = MainTabController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let emailAccount = emailTextField.text else { return }
+        guard let passwordAccount = passwordTextField.text else { return }
+        
+        
+        DEBUGMessage("Email: \(emailAccount)")
+        DEBUGMessage("Password: \(passwordAccount)")
+
+        Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { (result, error) in
+            
+            if let error = error {
+                DEBUGMessage("\(error.localizedDescription)")
+                return
+            }
+            
+            DEBUGMessage("Conta Criada com Sucesso")
+            let vc = MainTabController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+  
     }
     
     @objc func goLogin() {
         self.navigationController?.popViewController(animated: true)
+        DEBUGMessage("Voltou a tela de Login")
     }
     
     //MARK: - Helpers
@@ -154,6 +176,9 @@ extension RegistrationViewControlelr: UIImagePickerControllerDelegate {
         self.ImageButton.layer.borderColor = UIColor.white.cgColor
         
         self.dismiss(animated: true, completion: nil)
+        
+        DEBUGMessage("Imagem adicionada com sucesso ")
+        
     }
 }
 
