@@ -178,7 +178,7 @@ extension RegistrationViewControlelr: UIImagePickerControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         
         DEBUGMessage("Imagem adicionada com sucesso ")
-        
+        mensagem para mostrar
     }
 }
 
