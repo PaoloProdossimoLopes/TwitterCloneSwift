@@ -23,6 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 //        window?.rootViewController = LoginViewController()
         window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: RegistrationViewControlelr())
+
         window?.makeKeyAndVisible()
     }
 
