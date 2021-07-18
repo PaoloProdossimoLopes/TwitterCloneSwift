@@ -19,3 +19,15 @@ public func myPlaceholderStyle(text: String, Color: UIColor) -> NSAttributedStri
     return myCustomPlaceholder
 }
 
+func createDividerInStack() -> UIView {
+    let view = UIView()
+    
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .white
+    
+    NSLayoutConstraint.activate([
+        view.heightAnchor.constraint(equalToConstant: 1)
+    ])
+    
+    return view
+}

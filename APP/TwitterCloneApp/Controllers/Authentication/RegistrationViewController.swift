@@ -15,6 +15,7 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     //image
     
     private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
     
     private let ImageButton: UIButton = {
         let image = #imageLiteral(resourceName: "perfil")
@@ -29,21 +30,26 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     
     //Text field
     private let nameTextField: UITextField = {
-         let tf = UITextField()
-         tf.font = UIFont.systemFont(ofSize: 16)
-         tf.textColor = .white
-//         tf.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        let tf = UITextField()
+        tf.font = UIFont.systemFont(ofSize: 16)
+        tf.textColor = .white
+        //         tf.attributedPlaceholder = NSAttributedString(string: "Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         tf.attributedPlaceholder = myPlaceholderStyle(text: "Name", Color: .white)
         return tf
     }()
     
-    private let lastNameTextField: UITextField = {
+    let dividerOne = createDividerInStack()
+    
+    private let usernameTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 16)
         tf.textColor = .white
-        tf.attributedPlaceholder = NSAttributedString(string: "Lastname", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        //        tf.attributedPlaceholder = NSAttributedString(string: "Lastname", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        tf.attributedPlaceholder = myPlaceholderStyle(text: "Lastname", Color: .white)
         return tf
     }()
+    
+    let dividerTwo = createDividerInStack()
     
     private let emailTextField: UITextField = {
         let tf = UITextField()
@@ -53,6 +59,8 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
         return tf
     }()
     
+    let dividerThree = createDividerInStack()
+    
     private let passwordTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 16)
@@ -61,6 +69,8 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
         tf.isSecureTextEntry = true
         return tf
     }()
+    
+    let dividerFour = createDividerInStack()
     
     //Return button
     private lazy var loginButton: UIButton = {
@@ -98,26 +108,70 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
     }
     
     @objc func registerHandler() {
-        
+        guard let profileImage = profileImage else {
+            DEBUGMessage("Por favor selecione uma imagem de perfil ...")
+            return
+        }
         guard let emailAccount = emailTextField.text else { return }
         guard let passwordAccount = passwordTextField.text else { return }
+        guard let fullname = nameTextField.text else { return }
+        guard let username = usernameTextField.text else { return }
         
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+        let imageName = NSUUID().uuidString
         
         DEBUGMessage("Email: \(emailAccount)")
         DEBUGMessage("Password: \(passwordAccount)")
-
+        
         Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { (result, error) in
             
             if let error = error {
-                DEBUGMessage("\(error.localizedDescription)")
+                DEBUGMessage(error.localizedDescription)
                 return
             }
             
-            DEBUGMessage("Conta Criada com Sucesso")
-            let vc = MainTabController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            guard let UID = result?.user.uid else { return }
+            let ref = Database.database().reference().child("users").child(UID)
+            
+            let dataStorageRef = Storage.storage().reference()
+            let StorageFolder = dataStorageRef.child("profile_image").child(imageName)
+            
+            StorageFolder.putData(imageData, metadata: nil) { (meta, error) in
+                if let error = error {
+                    DEBUGMessage(error.localizedDescription)
+                }
+                DEBUGMessage("Sucesso")
+                
+                StorageFolder.downloadURL { (url, error) in
+                    if let error = error {
+                        DEBUGMessage(error.localizedDescription)
+                    }
+                    
+                    guard let profileImageURL = url?.absoluteString else { return }
+                    
+                    let data: [String : Any] = ["Username": username,
+                                                "Fullname": fullname,
+                                                "Profile-Image": profileImageURL,
+                                                "Email": emailAccount,
+                                                "Password": passwordAccount]
+                    
+                    ref.updateChildValues(data) { (erorr, reference) in
+                        
+                        if let error = error {
+                            DEBUGMessage("Error ao salvar os dados na base de dados")
+                            DEBUGMessage(error.localizedDescription)
+                        }
+                        
+                        DEBUGMessage("Sucesso em salvar os dados")
+                    }
+                    DEBUGMessage("Conta Criada com Sucesso")
+                    DEBUGMessage("Acesando o APP ...")
+                    let vc = MainTabController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
-  
+        
     }
     
     @objc func goLogin() {
@@ -151,13 +205,26 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
         view.addSubview(loginButton)
         loginButton.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 10, paddingBottom: 30, paddingRight: 10)
         
-        let stack = UIStackView(arrangedSubviews: [nameTextField, lastNameTextField, emailTextField, passwordTextField, createCountButton])
+        let stack = UIStackView(arrangedSubviews: [nameTextField,
+                                                   dividerOne,
+                                                   usernameTextField,
+                                                   dividerTwo,
+                                                   emailTextField,
+                                                   dividerThree,
+                                                   passwordTextField,
+                                                   dividerFour,
+                                                   createCountButton])
         stack.axis = .vertical
-        stack.spacing = 20
+        stack.spacing = 15
         
         view.addSubview(stack)
-        stack.anchor(top: ImageButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
-
+        stack.anchor(top: ImageButton.bottomAnchor,
+                     left: view.leftAnchor,
+                     right: view.rightAnchor,
+                     paddingTop: 20,
+                     paddingLeft: 20,
+                     paddingRight: 20)
+        
     }
 }
 
@@ -167,6 +234,7 @@ extension RegistrationViewControlelr: UIImagePickerControllerDelegate {
         
         guard let profileImage = info[.editedImage] as? UIImage else { return }
         self.ImageButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.profileImage = profileImage
         
         self.ImageButton.layer.cornerRadius = ImageButton.frame.height / 2
         self.ImageButton.layer.masksToBounds = true
