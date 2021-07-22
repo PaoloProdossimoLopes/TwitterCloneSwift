@@ -45,7 +45,7 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
         tf.font = UIFont.systemFont(ofSize: 16)
         tf.textColor = .white
         //        tf.attributedPlaceholder = NSAttributedString(string: "Lastname", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        tf.attributedPlaceholder = myPlaceholderStyle(text: "Lastname", Color: .white)
+        tf.attributedPlaceholder = myPlaceholderStyle(text: "Username", Color: .white)
         return tf
     }()
     
@@ -55,7 +55,7 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
         let tf = UITextField()
         tf.font = UIFont.systemFont(ofSize: 16)
         tf.textColor = .white
-        tf.attributedPlaceholder = NSAttributedString(string: "Username", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        tf.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         return tf
     }()
     
@@ -112,66 +112,26 @@ class RegistrationViewControlelr: UIViewController, UINavigationControllerDelega
             DEBUGMessage("Por favor selecione uma imagem de perfil ...")
             return
         }
+        
         guard let emailAccount = emailTextField.text else { return }
         guard let passwordAccount = passwordTextField.text else { return }
         guard let fullname = nameTextField.text else { return }
         guard let username = usernameTextField.text else { return }
         
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        let imageName = NSUUID().uuidString
+        let registerUserCredential = AuthCredentials(name: fullname, username: username, email: emailAccount, password: passwordAccount, imageProfile: profileImage)
         
-        DEBUGMessage("Email: \(emailAccount)")
-        DEBUGMessage("Password: \(passwordAccount)")
-        
-        Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { (result, error) in
-            
+        AuthService.shered.registerUser(registerUserCredential) { (error, ref) in
             if let error = error {
                 DEBUGMessage(error.localizedDescription)
-                return
             }
             
-            guard let UID = result?.user.uid else { return }
-            let ref = Database.database().reference().child("users").child(UID)
-            
-            let dataStorageRef = Storage.storage().reference()
-            let StorageFolder = dataStorageRef.child("profile_image").child(imageName)
-            
-            StorageFolder.putData(imageData, metadata: nil) { (meta, error) in
-                if let error = error {
-                    DEBUGMessage(error.localizedDescription)
-                }
-                DEBUGMessage("Sucesso")
-                
-                StorageFolder.downloadURL { (url, error) in
-                    if let error = error {
-                        DEBUGMessage(error.localizedDescription)
-                    }
-                    
-                    guard let profileImageURL = url?.absoluteString else { return }
-                    
-                    let data: [String : Any] = ["Username": username,
-                                                "Fullname": fullname,
-                                                "Profile-Image": profileImageURL,
-                                                "Email": emailAccount,
-                                                "Password": passwordAccount]
-                    
-                    ref.updateChildValues(data) { (erorr, reference) in
-                        
-                        if let error = error {
-                            DEBUGMessage("Error ao salvar os dados na base de dados")
-                            DEBUGMessage(error.localizedDescription)
-                        }
-                        
-                        DEBUGMessage("Sucesso em salvar os dados")
-                    }
-                    DEBUGMessage("Conta Criada com Sucesso")
-                    DEBUGMessage("Acesando o APP ...")
-                    let vc = MainTabController()
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
-            }
+            DEBUGMessage(" Sucesso para o processo de cadastro")
         }
         
+        DEBUGMessage("Conta Criada com Sucesso")
+        DEBUGMessage("Acesando o APP ...")
+        let vc = MainTabController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func goLogin() {

@@ -8,10 +8,13 @@
 import Foundation
 import UIKit
 
-public func DEBUGMessage(_ message: String) {
-    print("---")
-    print("DEBUG: \(message)")
-    print("---")
+public func DEBUGMessage(_ myMessage: String?) {
+    
+    guard let message = myMessage else { return }
+    
+    print("\n---")
+    print("📥 DEBUG: \(message)")
+    print("---\n")
 }
 
 public func myPlaceholderStyle(text: String, Color: UIColor) -> NSAttributedString {
