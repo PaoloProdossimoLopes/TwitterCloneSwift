@@ -30,13 +30,16 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userLoginOut() //Desfaz o login no autehticator ...
+//        userLoginOut() //Desfaz o login no autehticator ...
         view.backgroundColor = .twitterBlue
         AutehticationUSerAndConfigureUI()
         DEBUGMessage("MainTabController Carregou ...")
     }
     
     //MARK: - API
+
+    
+
     func AutehticationUSerAndConfigureUI() {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -49,8 +52,13 @@ class MainTabController: UITabBarController {
             configureViewControllers()
             setupStyleNavigationBar()
             configureUIButtonAction()
+            fetchUser()
             
         }
+    }
+    
+    func fetchUser() {
+        UserService.shared.fetchUser()
     }
     
     private func userLoginOut() {

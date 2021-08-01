@@ -99,13 +99,17 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Nimble (9.2.0)
   - PromisesObjC (1.2.12)
+  - Quick (4.0.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - Nimble
+  - Quick
 
 SPEC REPOS:
   trunk:
@@ -123,7 +127,9 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - Nimble
     - PromisesObjC
+    - Quick
 
 SPEC CHECKSUMS:
   Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
@@ -140,8 +146,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
 
-PODFILE CHECKSUM: fe094535d76e2b3cc9cb7a65fb48577194d46026
+PODFILE CHECKSUM: c13d8b3f6d4e108f846c6ba4d0c06dcd03f7ddb0
 
 COCOAPODS: 1.10.0

@@ -24,6 +24,7 @@
 		9DD457822650DC23001C2B10 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD457812650DC23001C2B10 /* ExploreController.swift */; };
 		9DD457872650DC42001C2B10 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD457862650DC42001C2B10 /* NotificationController.swift */; };
 		9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */; };
+		9DD6D9D726B6A49C007D9A00 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6D9D626B6A49C007D9A00 /* UserService.swift */; };
 		9DED3A73265524FD00C6269B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A72265524FD00C6269B /* LoginController.swift */; };
 		9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */; };
 		9DF243CC26627D8F0097576F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF243BC266266900097576F /* Extensions.swift */; };
@@ -75,6 +76,7 @@
 		9DD457812650DC23001C2B10 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
 		9DD457862650DC42001C2B10 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCntroller.swift; sourceTree = "<group>"; };
+		9DD6D9D626B6A49C007D9A00 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		9DED3A72265524FD00C6269B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9DF243BC266266900097576F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9D2E381F26A4F29E008E9EAD /* AuthService.swift */,
+				9DD6D9D626B6A49C007D9A00 /* UserService.swift */,
 			);
 			path = My_API_ShortCuts;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DD6D9D726B6A49C007D9A00 /* UserService.swift in Sources */,
 				9DD457872650DC42001C2B10 /* NotificationController.swift in Sources */,
 				9D77E27326A44C7500339E81 /* MyCustomShotCutFunctions.swift in Sources */,
 				9DD457362650D80F001C2B10 /* AppDelegate.swift in Sources */,

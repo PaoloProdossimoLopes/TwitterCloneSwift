@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 public func DEBUGMessage(_ myMessage: String?) {
-    
     guard let message = myMessage else { return }
     
     print("\n---")

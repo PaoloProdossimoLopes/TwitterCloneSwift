@@ -20,4 +20,6 @@ end
 
 target 'TwitterCloneAppUITests' do
 	# Pods for testing
+  pod 'Quick'
+  pod 'Nimble'
 end
