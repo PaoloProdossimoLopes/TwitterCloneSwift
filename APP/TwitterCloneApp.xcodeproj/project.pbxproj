@@ -25,6 +25,7 @@
 		9DD457872650DC42001C2B10 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD457862650DC42001C2B10 /* NotificationController.swift */; };
 		9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */; };
 		9DD6D9D726B6A49C007D9A00 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6D9D626B6A49C007D9A00 /* UserService.swift */; };
+		9DD6D9E526B6ADA7007D9A00 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD6D9E426B6ADA7007D9A00 /* User.swift */; };
 		9DED3A73265524FD00C6269B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A72265524FD00C6269B /* LoginController.swift */; };
 		9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */; };
 		9DF243CC26627D8F0097576F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF243BC266266900097576F /* Extensions.swift */; };
@@ -77,6 +78,7 @@
 		9DD457862650DC42001C2B10 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		9DD4578C2650DCDE001C2B10 /* MessageCntroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCntroller.swift; sourceTree = "<group>"; };
 		9DD6D9D626B6A49C007D9A00 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		9DD6D9E426B6ADA7007D9A00 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9DED3A72265524FD00C6269B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9DED3A7A2655266B00C6269B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9DF243BC266266900097576F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -142,13 +144,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9D2E381026A4F13F008E9EAD /* My_API_ShortCuts */ = {
+		9D2E381026A4F13F008E9EAD /* API */ = {
 			isa = PBXGroup;
 			children = (
 				9D2E381F26A4F29E008E9EAD /* AuthService.swift */,
 				9DD6D9D626B6A49C007D9A00 /* UserService.swift */,
 			);
-			path = My_API_ShortCuts;
+			path = API;
 			sourceTree = "<group>";
 		};
 		9DD457292650D80F001C2B10 = {
@@ -176,8 +178,12 @@
 		9DD457342650D80F001C2B10 /* TwitterCloneApp */ = {
 			isa = PBXGroup;
 			children = (
-				9DF243B6266266620097576F /* Utils */,
+				9DD6D9E326B6AD5D007D9A00 /* Model */,
+				9DD6D9E226B6AD51007D9A00 /* View */,
+				9DD6D9E126B6AD49007D9A00 /* ViewModel */,
 				9DD457692650D895001C2B10 /* Controllers */,
+				9D2E381026A4F13F008E9EAD /* API */,
+				9DF243B6266266620097576F /* Utils */,
 				9DD457352650D80F001C2B10 /* AppDelegate.swift */,
 				9DD457372650D80F001C2B10 /* SceneDelegate.swift */,
 				9DD4573E2650D810001C2B10 /* Assets.xcassets */,
@@ -221,6 +227,28 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		9DD6D9E126B6AD49007D9A00 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9DD6D9E226B6AD51007D9A00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9DD6D9E326B6AD5D007D9A00 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DD6D9E426B6ADA7007D9A00 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9DED3A71265524D400C6269B /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +261,6 @@
 		9DF243B6266266620097576F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				9D2E381026A4F13F008E9EAD /* My_API_ShortCuts */,
 				9DFF21762663CD7000A3C728 /* Components.swift */,
 				9D77E27226A44C7500339E81 /* MyCustomShotCutFunctions.swift */,
 			);
@@ -469,6 +496,7 @@
 				9DD457822650DC23001C2B10 /* ExploreController.swift in Sources */,
 				9DED3A7B2655266B00C6269B /* RegistrationViewController.swift in Sources */,
 				9D2E382026A4F29E008E9EAD /* AuthService.swift in Sources */,
+				9DD6D9E526B6ADA7007D9A00 /* User.swift in Sources */,
 				9DD4578D2650DCDE001C2B10 /* MessageCntroller.swift in Sources */,
 				9DF243CC26627D8F0097576F /* Extensions.swift in Sources */,
 				9DD457382650D80F001C2B10 /* SceneDelegate.swift in Sources */,

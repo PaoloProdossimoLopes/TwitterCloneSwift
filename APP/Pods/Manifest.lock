@@ -102,6 +102,9 @@ PODS:
   - Nimble (9.2.0)
   - PromisesObjC (1.2.12)
   - Quick (4.0.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -110,6 +113,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Nimble
   - Quick
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -130,6 +134,7 @@ SPEC REPOS:
     - Nimble
     - PromisesObjC
     - Quick
+    - SDWebImage
 
 SPEC CHECKSUMS:
   Firebase: 817b9171d0d51dccc458b94a5e8edff6b1dd323d
@@ -149,7 +154,8 @@ SPEC CHECKSUMS:
   Nimble: 4f4a345c80b503b3ea13606a4f98405974ee4d0b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: c13d8b3f6d4e108f846c6ba4d0c06dcd03f7ddb0
+PODFILE CHECKSUM: 9407acaf0c41050f88518877b541f8d9165e65d4
 
 COCOAPODS: 1.10.0

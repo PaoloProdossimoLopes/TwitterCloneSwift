@@ -16,6 +16,7 @@ end
 target 'TwitterCloneAppTests' do
     	inherit! :search_paths
     	# Pods for testing
+      pod 'SDWebImage'
 end
 
 target 'TwitterCloneAppUITests' do
