@@ -11,7 +11,7 @@ import Firebase
 struct UserService {
     static let shared = UserService()
     
-    func fetchUser() {
+    func fetchUser(completion: @escaping((User) -> Void)) {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         DEBUGMessage("UserID: \(userID)")
         
@@ -31,6 +31,7 @@ struct UserService {
 //            DEBUGMessage("\(user)")
             
             let user = User(uid: userID, dictionary: dictionary)
+            completion(user)
             DEBUGMessage("\(user)")
         }
     }

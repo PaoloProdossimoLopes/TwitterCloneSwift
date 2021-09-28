@@ -10,10 +10,26 @@ import Firebase
 
 class MainTabController: UITabBarController {
     
+    //MARK: - Properties
+    
+    
+    var user: User? {
+        didSet {
+            DEBUGMessage("Did set User Variable in MainTabController")
+            DEBUGMessage("variable USER in MainTabViewController is \(user)")
+            
+//            guard let nav = viewControllers?[0] as? UINavigationController else { return }
+            guard let nav = viewControllers?.first as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = user
+            
+        }
+    }
+    
     let buttonAction:  UIButton = {
         
         let button = UIButton(type: .system)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .twitterBlue
         button.tintColor = .white
         
         button.setImage(UIImage(named: "new_tweet"), for: .normal)
@@ -34,6 +50,7 @@ class MainTabController: UITabBarController {
         view.backgroundColor = .twitterBlue
         AutehticationUSerAndConfigureUI()
         DEBUGMessage("MainTabController Carregou ...")
+        
     }
     
     //MARK: - API
@@ -58,7 +75,9 @@ class MainTabController: UITabBarController {
     }
     
     func fetchUser() {
-        UserService.shared.fetchUser()
+        UserService.shared.fetchUser { (user) in
+            self.user = user
+        }
     }
     
     private func userLoginOut() {
@@ -77,8 +96,13 @@ extension MainTabController{
     // MARK: - Properties
 
     //MARK: - Selectors
-    @objc func TouchActionButton(){
+    @objc func TouchActionButton() {
         print("Toquei no botao de Criar um novo post")
+        let vc = UploadTweetControllerViewController(config: .tweet)
+        vc.user = user
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
 
     // MARK: - Helpers
@@ -104,7 +128,7 @@ extension MainTabController{
     func configureViewControllers(){
         
         //Instanciando e custostomizando as controllers
-        let feed = FeedController()
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         //feed.tabBarItem.image = UIImage(named: "feed")
         let feedNav = templateNavigationCOntroller(MyImageName: "home", MyViewController: feed, NavigationBar: false)
         
@@ -142,6 +166,7 @@ extension MainTabController{
         nav.navigationBar.backgroundColor = .white
         nav.setNavigationBarHidden(NavigationBar, animated: !NavigationBar)
         nav.navigationBar.isHidden = NavigationBar
+        
         return nav
     }
     

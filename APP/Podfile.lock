@@ -113,7 +113,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Nimble
   - Quick
-  - SDWebImage
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
@@ -156,6 +156,6 @@ SPEC CHECKSUMS:
   Quick: 6473349e43b9271a8d43839d9ba1c442ed1b7ac4
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 9407acaf0c41050f88518877b541f8d9165e65d4
+PODFILE CHECKSUM: 71babfcd9f7d30ea991aa19c5e1c182df7a9722e
 
 COCOAPODS: 1.10.0
