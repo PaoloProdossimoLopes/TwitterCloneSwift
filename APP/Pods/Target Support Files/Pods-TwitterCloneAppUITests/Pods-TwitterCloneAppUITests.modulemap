@@ -1,0 +1,6 @@
+module Pods_TwitterCloneAppUITests {
+  umbrella header "Pods-TwitterCloneAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

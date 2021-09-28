@@ -115,13 +115,12 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        DEBUGMessage("Tela de login carregou")
         configureUI()
-       
+        DEBUGMessage("Tela de login carregou")
     }
     
     //MARK: - Selectors
@@ -133,15 +132,50 @@ class LoginViewController: UIViewController {
     
     @objc private func LoginAccept() {
         
-        guard let email = emailTexteField.text else { return }
-        guard let password = passwordTextField.text else { return }
+        guard let email = emailTexteField.text else {
+//            let alert = AuthService.shered.showAlertPopUpError(fromViewController: self, titulo: "", message: "")
+//            present(alert, animated: true, completion: nil)
+            AuthService.shered.showAlertPopUpError(fromViewController: self, titulo: "", message: "")
+            return
+        }
+        
+        guard let password = passwordTextField.text else {
+//            let alert = AuthService.shered.showAlertPopUpError(titulo: "", Message: "")
+//            present(alert, animated: true, completion: nil)
+            return
+        }
         
         DEBUGMessage("Email: \(email)")
         DEBUGMessage("Senha: \(password)")
         
-        let view = MainTabController()
-        navigationController?.pushViewController(view, animated: true)
+        AuthService.shered.userLogin(email: email, password: password) { (result, error) in
+            if result != nil {
+                DEBUGMessage("Sucesso mna verificaçao")
+//                let alert = AuthService.shered.showAlertPopUpError(titulo: "", Message: "")
+//                self.present(alert, animated: true, completion: nil)
+                
+//                let nav = UINavigationController(rootViewController: MainTabController())
+//                nav.modalPresentationStyle = .fullScreen
+//                self.present(nav, animated: true, completion: nil)
+                
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+                guard let tab = window.rootViewController as? MainTabController else { return }
+                tab.AutehticationUSerAndConfigureUI()
+                
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                DEBUGMessage(error?.localizedDescription)
+//                let alert = AuthService.shered.showAlertPopUpError(titulo: "", Message: "")
+//                self.present(alert, animated: true, completion: nil)
+                
+            }
+  
+        }
+//        let view = MainTabController()
+//        navigationController?.pushViewController(view, animated: true)
     }
+    
+    
     
     //MARK: - Helpers
     
@@ -150,7 +184,6 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
 
-        
         view.addSubview(twitterLogo)
         twitterLogo.heightAnchor.constraint(equalToConstant: 150).isActive = true
         twitterLogo.widthAnchor.constraint(equalToConstant: 150).isActive = true

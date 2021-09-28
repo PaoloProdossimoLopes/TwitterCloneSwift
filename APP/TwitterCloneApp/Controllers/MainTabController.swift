@@ -6,13 +6,30 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabController: UITabBarController {
+    
+    //MARK: - Properties
+    
+    
+    var user: User? {
+        didSet {
+            DEBUGMessage("Did set User Variable in MainTabController")
+            DEBUGMessage("variable USER in MainTabViewController is \(user)")
+            
+//            guard let nav = viewControllers?[0] as? UINavigationController else { return }
+            guard let nav = viewControllers?.first as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = user
+            
+        }
+    }
     
     let buttonAction:  UIButton = {
         
         let button = UIButton(type: .system)
-        button.backgroundColor = .systemBlue
+        button.backgroundColor = .twitterBlue
         button.tintColor = .white
         
         button.setImage(UIImage(named: "new_tweet"), for: .normal)
@@ -29,13 +46,46 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        userLoginOut() //Desfaz o login no autehticator ...
+        view.backgroundColor = .twitterBlue
+        AutehticationUSerAndConfigureUI()
+        DEBUGMessage("MainTabController Carregou ...")
         
-        configureViewControllers()
-        setupStyleNavigationBar()
-        configureUIButtonAction()
-        
-        
-        
+    }
+    
+    //MARK: - API
+
+    
+
+    func AutehticationUSerAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let viewController = LoginViewController()
+                let nav = UINavigationController(rootViewController: viewController)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+            configureViewControllers()
+            setupStyleNavigationBar()
+            configureUIButtonAction()
+            fetchUser()
+            
+        }
+    }
+    
+    func fetchUser() {
+        UserService.shared.fetchUser { (user) in
+            self.user = user
+        }
+    }
+    
+    private func userLoginOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            DEBUGMessage("Ocorreu um erro: \(error.localizedDescription)")
+        }
     }
 
 }
@@ -46,17 +96,20 @@ extension MainTabController{
     // MARK: - Properties
 
     //MARK: - Selectors
-    @objc func TouchActionButton(){
+    @objc func TouchActionButton() {
         print("Toquei no botao de Criar um novo post")
-
-        
+        let vc = UploadTweetControllerViewController(config: .tweet)
+        vc.user = user
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
 
     // MARK: - Helpers
     
     func configureUIButtonAction(){
         view.addSubview(buttonAction)
-        
+        navigationController?.navigationBar.isHidden = true
 //        let buttonSize = 10
         
         buttonAction.contentMode = .scaleAspectFit
@@ -75,24 +128,24 @@ extension MainTabController{
     func configureViewControllers(){
         
         //Instanciando e custostomizando as controllers
-        let feed = FeedController()
+        let feed = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
         //feed.tabBarItem.image = UIImage(named: "feed")
-        let feedNav = templateNavigationCOntroller(MyImageName: "home", MyViewController: feed)
+        let feedNav = templateNavigationCOntroller(MyImageName: "home", MyViewController: feed, NavigationBar: false)
         
         
         let explore = ExploreController()
 //        explore.tabBarItem.image = UIImage(named: "explore")
-        let exploreNav = templateNavigationCOntroller(MyImageName: "search", MyViewController: explore)
+        let exploreNav = templateNavigationCOntroller(MyImageName: "search", MyViewController: explore, NavigationBar: false)
         
         
         let notification = NotificationController()
 //        notification.tabBarItem.image = UIImage(named: "notification")
-        let notificationNav = templateNavigationCOntroller(MyImageName: "comment", MyViewController: notification)
+        let notificationNav = templateNavigationCOntroller(MyImageName: "comment", MyViewController: notification, NavigationBar: false)
         
         
         let message = MessageController()
 //        message.tabBarItem.image = UIImage(named: "message")
-        let messageNav = templateNavigationCOntroller(MyImageName: "perfil", MyViewController: message)
+        let messageNav = templateNavigationCOntroller(MyImageName: "perfil", MyViewController: message, NavigationBar: false)
         
         
         //palavra reservada para a tabBar setar quais view exibir nela para navegar
@@ -101,7 +154,7 @@ extension MainTabController{
     }
     
     
-    func templateNavigationCOntroller(MyImageName: String, MyViewController: UIViewController) -> UINavigationController{
+    func templateNavigationCOntroller(MyImageName: String, MyViewController: UIViewController, NavigationBar: Bool) -> UINavigationController{
         
         //Vinculando uma Viewcontroller para criar uma NavigationBar
         let nav = UINavigationController(rootViewController: MyViewController)
@@ -111,7 +164,9 @@ extension MainTabController{
         nav.tabBarController?.tabBar.backgroundColor = .white
         //Customizando a NavigationBar
         nav.navigationBar.backgroundColor = .white
-         
+        nav.setNavigationBarHidden(NavigationBar, animated: !NavigationBar)
+        nav.navigationBar.isHidden = NavigationBar
+        
         return nav
     }
     
